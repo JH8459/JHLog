@@ -5,6 +5,17 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
+#vscode
+.vscode
+
+#eslint
+.eslintrc.json
+.eslintignore
+
+#prettier
+.prettierignore
+.prettierrc
+
 # Runtime data
 pids
 *.pid
