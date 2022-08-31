@@ -3,9 +3,7 @@ import styled from '@emotion/styled'
 import PostItem from 'components/Main/PostItem'
 import { PostListItemType } from 'types/PostItem.types'
 import { IGatsbyImageData } from 'gatsby-plugin-image'
-import useInfiniteScroll, {
-  useInfiniteScrollType,
-} from 'hooks/useInfiniteScroll'
+import useInfiniteScroll, { useInfiniteScrollType } from 'hooks/useInfiniteScroll'
 
 export type PostType = {
   node: {
@@ -44,21 +42,24 @@ const PostListWrapper = styled.div`
   }
 `
 
-const PostList: FunctionComponent<PostListProps> = function ({
-  selectedCategory,
-  posts,
-}) {
-  const { containerRef, postList }: useInfiniteScrollType = useInfiniteScroll(
-    selectedCategory,
-    posts,
-  )
+const PostList: FunctionComponent<PostListProps> = function ({ selectedCategory, posts }) {
+  const { containerRef, postList }: useInfiniteScrollType = useInfiniteScroll(selectedCategory, posts)
 
   return (
     <PostListWrapper ref={containerRef}>
-      {postList.map(({ node: { id, frontmatter } }: PostListItemType) => (
-        <PostItem {...frontmatter} link="https://www.google.co.kr/" key={id} />
-      ))}
+      {postList.map(
+        ({
+          node: {
+            id,
+            fields: { slug },
+            frontmatter,
+          },
+        }: PostListItemType) => (
+          <PostItem {...frontmatter} link={slug} key={id} />
+        ),
+      )}
     </PostListWrapper>
   )
 }
+
 export default PostList
