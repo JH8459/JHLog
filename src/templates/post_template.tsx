@@ -3,6 +3,7 @@ import { graphql } from 'gatsby'
 import { PostFrontmatterType, PostPageItemType } from 'types/PostItem.types' // 바로 아래에서 정의할 것입니다
 import Template from 'components/Common/Template'
 import PostHead from 'components/Post/PostHead'
+import PostContent from 'components/post/postContent'
 
 type PostTemplateProps = {
   data: {
@@ -11,6 +12,7 @@ type PostTemplateProps = {
     }
   }
 }
+
 export type PostPageItemType = {
   node: {
     html: string
@@ -28,7 +30,7 @@ const PostTemplate: FunctionComponent<PostTemplateProps> = function ({
       html,
       frontmatter: {
         title,
-        summary, // 나중에 사용할 예정입니다!
+        summary,
         date,
         categories,
         thumbnail: {
@@ -41,6 +43,7 @@ const PostTemplate: FunctionComponent<PostTemplateProps> = function ({
   return (
     <Template>
       <PostHead title={title} date={date} categories={categories} thumbnail={gatsbyImageData} />
+      <PostContent html={html} />
     </Template>
   )
 }
